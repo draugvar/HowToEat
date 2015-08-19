@@ -4,4 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="loading">loading... please wait a moment.</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="login_password"> Password</string>
+    <string name="login_email">Email</string>
 </resources>
