@@ -52,9 +52,10 @@
             android:adjustViewBounds="true"
             android:maxWidth="150dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/loginButton"
+            android:src="@drawable/login_button"
             android:layout_marginTop="20dp"
-            android:background="@color/SeaGreen"/>
+            android:background="@color/SeaGreen"
+            android:contentDescription="LoginButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,12 +71,11 @@
             android:id="@+id/FbButton"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:maxWidth="200dp"
+            android:maxWidth="250dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/loginFb"
+            android:src="@drawable/login_fb"
             android:background="@color/SeaGreen"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:contentDescription="fbButton" />
     </LinearLayout>
-
-
 </RelativeLayout>

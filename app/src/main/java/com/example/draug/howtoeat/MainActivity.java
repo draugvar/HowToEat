@@ -1,17 +1,20 @@
 package com.example.draug.howtoeat;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends /*AppCompatActivity*/ Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
 
         int SPLASH_TIME_OUT = 5000;
@@ -26,18 +29,17 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                //Intent i = new Intent(SplashScreen.this, MainActivity.class);
-                //startActivity(i);
-                setContentView(R.layout.activity_main);
-                getSupportActionBar().show();
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+
                 // close this activity
-                //finish();
+                finish();
             }
         }, SPLASH_TIME_OUT);
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -57,5 +59,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
