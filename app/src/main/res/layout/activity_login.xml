@@ -31,7 +31,9 @@
             android:id="@+id/editTextEmail"
             android:layout_gravity="center_horizontal"
             android:background="@color/White"
-            android:hint="@string/login_email"/>
+            android:hint="@string/login_email"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -42,7 +44,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="@color/White"
-            android:hint="@string/login_password"/>
+            android:hint="@string/login_password"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -56,6 +60,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/SeaGreen"
             android:contentDescription="LoginButton"
+            android:clickable="true"
             android:onClick="clickLogin"/>
 
         <TextView
@@ -72,7 +77,7 @@
             android:id="@+id/FbButton"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:maxWidth="250dp"
+            android:maxWidth="150dp"
             android:scaleType="fitCenter"
             android:src="@drawable/login_fb"
             android:background="@color/SeaGreen"

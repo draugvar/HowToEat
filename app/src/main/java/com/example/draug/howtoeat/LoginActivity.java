@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,6 +19,10 @@ public class LoginActivity extends AppCompatActivity {
         EditText textEmail = (EditText) findViewById(R.id.editTextEmail);
         EditText textPassword = (EditText) findViewById(R.id.editTextPassword);
 
+        if( (textEmail.getText().equals("")) || (textPassword.getText().equals(""))){
+            Toast.makeText(getApplicationContext(), "Inserire email e password!", Toast.LENGTH_SHORT).show();
+        } else {
 
+        }
     }
 }
