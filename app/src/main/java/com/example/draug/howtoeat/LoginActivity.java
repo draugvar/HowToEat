@@ -1,5 +1,6 @@
 package com.example.draug.howtoeat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
         if( (textEmail.getText().toString().equals("")) || (textPassword.getText().toString().equals(""))){
             Toast.makeText(getApplicationContext(), "Inserire email e password!", Toast.LENGTH_SHORT).show();
         } else {
-
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(i);
         }
     }
 }
