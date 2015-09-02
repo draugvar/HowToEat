@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HowToEat</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="loading">loading… please wait a moment.</string>
@@ -8,4 +7,11 @@
     <string name="login_password">Password</string>
     <string name="login_email">Email</string>
     <string name="title_activity_home">HomeActivity</string>
+
+    <string-array name="navigation_array">
+        <item>Home page</item>
+        <item>I miei preferiti</item>
+        <item>Il mio account</item>
+        <item>Impostazioni</item>
+    </string-array>
 </resources>

@@ -4,12 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
 
-public class MainActivity extends /*AppCompatActivity*/ Activity {
+public class SplashActivity extends /*AppCompatActivity*/ Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +14,7 @@ public class MainActivity extends /*AppCompatActivity*/ Activity {
         setContentView(R.layout.activity_splash);
 
         int SPLASH_TIME_OUT = 3000;
+
         new Handler().postDelayed(new Runnable() {
 
             /*
@@ -29,7 +26,7 @@ public class MainActivity extends /*AppCompatActivity*/ Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
 
                 // close this activity
