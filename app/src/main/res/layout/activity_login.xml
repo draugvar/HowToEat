@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="150dp"
         android:orientation="vertical"
         android:background="@color/SeaGreen">
         <!-- here header -->
