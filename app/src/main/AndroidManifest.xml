@@ -18,13 +18,11 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".SplashActivity" >
+            android:label="@string/title_activity_login" >
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:parentActivityName=".LoginActivity" >
+            android:label="@string/title_activity_home" >
         </activity>
     </application>
 
