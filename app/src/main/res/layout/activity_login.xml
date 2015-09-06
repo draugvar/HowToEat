@@ -61,7 +61,7 @@
             android:background="@color/SeaGreen"
             android:contentDescription="LoginButton"
             android:clickable="true"
-            android:onClick="clickLogin"/>
+            android:onClick="buttonLogin"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,6 +82,7 @@
             android:src="@drawable/login_fb"
             android:background="@color/SeaGreen"
             android:layout_marginTop="10dp"
-            android:contentDescription="fbButton" />
+            android:contentDescription="fbButton"
+            android:onClick="buttonFb" />
     </LinearLayout>
 </RelativeLayout>

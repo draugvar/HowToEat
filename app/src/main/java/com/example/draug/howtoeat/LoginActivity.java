@@ -19,7 +19,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
-    public void clickLogin(View view){
+    public void buttonLogin(View view){
         String textEmail = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
         String textPassword = ((EditText) findViewById(R.id.editTextPassword)).getText().toString();
         Context context = getApplicationContext();
@@ -35,5 +35,15 @@ public class LoginActivity extends Activity {
             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(i);
         }
+    }
+    public void buttonFb(View view){
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("userEmail", "ciao@email.com");
+        editor.putString("userPassword", "caos");
+        editor.apply();
+        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(i);
     }
 }
