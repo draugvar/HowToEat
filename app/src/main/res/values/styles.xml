@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/SeaGreen</item>
         <item name="colorPrimaryDark">@color/DarkGreen</item>
         <item name="colorAccent">@color/PaleGreen</item>
+        <item name="android:textColorPrimary">@color/White</item>
     </style>
 
 </resources>
