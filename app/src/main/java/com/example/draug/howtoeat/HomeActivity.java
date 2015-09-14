@@ -9,6 +9,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -81,6 +82,26 @@ public class HomeActivity extends AppCompatActivity {
         username.setText(sharedPref.getString("userEmail", "username"));
         email.setText(sharedPref.getString("userEmail", "username"));
 
+        // 1. get a reference to recyclerView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // this is data fro recycler view
+        ItemData itemsData[] = { new ItemData("Il Fosso",R.mipmap.ic_launcher),
+                new ItemData("PiazzaPiù",R.mipmap.ic_launcher),
+                new ItemData("Cloud",R.mipmap.ic_launcher),
+                new ItemData("Favorite Dishes",R.mipmap.ic_launcher),
+                new ItemData("Like Eat",R.mipmap.ic_launcher),
+                new ItemData("A muzzarell'",R.mipmap.ic_launcher),
+                new ItemData("Da Maria",R.mipmap.ic_launcher)};
+
+        // 2. set layoutManger
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 3. create an adapter
+        MyAdapter mAdapter = new MyAdapter(itemsData);
+        // 4. set adapter
+        recyclerView.setAdapter(mAdapter);
+        // 5. set item animator to DefaultAnimator
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
