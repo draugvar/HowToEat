@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // this is data fro recycler view
         ItemData itemsData[] = { new ItemData("Il Fosso",R.mipmap.ic_launcher),
-                new ItemData("PiazzaPiù",R.mipmap.ic_launcher),
+                new ItemData("PizzaPiù",R.mipmap.ic_launcher),
                 new ItemData("Cloud",R.mipmap.ic_launcher),
                 new ItemData("Favorite Dishes",R.mipmap.ic_launcher),
                 new ItemData("Like Eat",R.mipmap.ic_launcher),
