@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         String[] mNavigation = getResources().getStringArray(R.array.navigation_array);
-        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout mDrawerLayout;
         ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
@@ -86,13 +86,13 @@ public class HomeActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // this is data fro recycler view
-        ItemData itemsData[] = { new ItemData("Il Fosso",R.mipmap.ic_launcher),
-                new ItemData("PizzaPiù",R.mipmap.ic_launcher),
-                new ItemData("Cloud",R.mipmap.ic_launcher),
-                new ItemData("Favorite Dishes",R.mipmap.ic_launcher),
-                new ItemData("Like Eat",R.mipmap.ic_launcher),
-                new ItemData("A muzzarell'",R.mipmap.ic_launcher),
-                new ItemData("Da Maria",R.mipmap.ic_launcher)};
+        ItemData itemsData[] = { new ItemData("Il Fosso",R.drawable.restaurant_icon),
+                new ItemData("PizzaPiù",R.drawable.pizza_icon),
+                new ItemData("Cloud",R.drawable.restaurant_icon),
+                new ItemData("Favorite Dishes",R.drawable.restaurant_icon),
+                new ItemData("Like Eat",R.drawable.restaurant_icon),
+                new ItemData("A muzzarell'",R.drawable.pizza_icon),
+                new ItemData("Da Maria",R.drawable.pizza_icon)};
 
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
