@@ -1,14 +1,13 @@
 package com.example.draug.howtoeat;
 
-/**
- * Created by Draugvar on 14/09/15.
- */
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ItemData[] itemsData;
@@ -40,7 +39,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         viewHolder.txtViewTitle.setText(itemsData[position].getTitle());
         viewHolder.imgViewIcon.setImageResource(itemsData[position].getImageUrl());
-
 
     }
 

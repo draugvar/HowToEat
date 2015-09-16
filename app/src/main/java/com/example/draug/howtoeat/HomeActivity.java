@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
@@ -31,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         String[] mNavigation = getResources().getStringArray(R.array.navigation_array);
         DrawerLayout mDrawerLayout;
         ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -87,6 +88,14 @@ public class HomeActivity extends AppCompatActivity {
 
         // 1. get a reference to recyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // do whatever
+                        Toast.makeText(context,"Sono l'item n. " + position,Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
 
         // this is data fro recycler view
         ItemData itemsData[] = { new ItemData("Il Fosso",R.drawable.restaurant_icon),
