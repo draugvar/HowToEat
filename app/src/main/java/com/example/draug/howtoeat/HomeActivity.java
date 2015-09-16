@@ -1,6 +1,7 @@
 package com.example.draug.howtoeat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -26,6 +27,8 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    public final static String EXTRA_ITEM = "item_data";
+    public final static String EXTRA_POSITION = "position";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +72,6 @@ public class HomeActivity extends AppCompatActivity {
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        //getSupportActionBar().setDisplayUseLogoEnabled(true);
-
         // Set user image and info
         ImageView userImage = (ImageView) findViewById(R.id.userImage);
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user_image);
@@ -87,24 +84,16 @@ public class HomeActivity extends AppCompatActivity {
         email.setText(sharedPref.getString("userEmail", "username"));
 
         // 1. get a reference to recyclerView
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        // do whatever
-                        Toast.makeText(context,"Sono l'item n. " + position,Toast.LENGTH_SHORT).show();
-                    }
-                })
-        );
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        // this is data fro recycler view
-        ItemData itemsData[] = { new ItemData("Il Fosso",R.drawable.restaurant_icon),
-                new ItemData("PizzaPiù",R.drawable.pizza_icon),
-                new ItemData("Cloud",R.drawable.restaurant_icon),
-                new ItemData("Favorite Dishes",R.drawable.restaurant_icon),
-                new ItemData("Like Eat",R.drawable.restaurant_icon),
-                new ItemData("A muzzarell'",R.drawable.pizza_icon),
-                new ItemData("Da Maria",R.drawable.pizza_icon)};
+        // this is data for recycler view
+        final ItemData itemsData[] = { new ItemData("Il Fosso","",R.drawable.restaurant_icon),
+                new ItemData("PizzaPiù","",R.drawable.pizza_icon),
+                new ItemData("Cloud","",R.drawable.restaurant_icon),
+                new ItemData("Favorite Dishes","",R.drawable.restaurant_icon),
+                new ItemData("Like Eat","",R.drawable.restaurant_icon),
+                new ItemData("A muzzarell'","",R.drawable.pizza_icon),
+                new ItemData("Da Maria","",R.drawable.pizza_icon)};
 
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -114,6 +103,19 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        // 6. set clickListener
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // starting new activity
+                        Intent i = new Intent(HomeActivity.this, LocationActivity.class);
+                        Bundle b = new Bundle();
+                        b.putParcelable(EXTRA_ITEM,itemsData[position]);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
+                })
+        );
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
@@ -154,6 +156,10 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
 

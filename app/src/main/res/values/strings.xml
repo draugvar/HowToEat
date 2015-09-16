@@ -16,4 +16,5 @@
         <item>Il mio account</item>
         <item>Impostazioni</item>
     </string-array>
+    <string name="title_activity_location">LocationActivity</string>
 </resources>

@@ -3,16 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="android:homeAsUpIndicator">@drawable/ic_drawer</item>
         <item name="colorPrimary">@color/SeaGreen</item>
         <item name="colorPrimaryDark">@color/DarkSeaGreen</item>
         <item name="colorAccent">@color/LightGrey</item>
         <item name="android:textColorPrimary">@color/White</item>
-        <item name="android:actionBarStyle">@style/ActionBar</item>
     </style>
-    <!-- ActionBar theme. -->
-    <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:icon">@mipmap/ic_launcher</item>
-    </style>
-
 </resources>

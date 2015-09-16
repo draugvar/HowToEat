@@ -61,4 +61,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public int getItemCount() {
         return itemsData.length;
     }
+
+    public ItemData getItemDataByID( int position ){
+        return itemsData[position];
+    }
 }
