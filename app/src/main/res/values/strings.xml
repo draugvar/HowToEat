@@ -9,6 +9,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_location">LocationActivity</string>
 
     <string-array name="navigation_array">
         <item>Home page</item>
@@ -16,5 +17,13 @@
         <item>Il mio account</item>
         <item>Impostazioni</item>
     </string-array>
-    <string name="title_activity_location">LocationActivity</string>
+    <string-array name="locations_array">
+        <item>Ciacco e Bacco:!:Ispirato alle piccole botteghe toscane, Ciacco e Bacco (dal nome di un famoso goloso fiorentino e del celebre dio del vino) nasce dall\'idea di servire insalate, taglieri e panini gustosi e genuini, preparati sul momento con i migliori prodotti regionali italiani, unendo qualità, bontà e freschezza, il tutto accompagnato da una selezione di ottimi vini. ....e per concludere al meglio i vostri momenti di pausa non perdetevi i nostri fantastici dolci preparati da noi quotidianamente..!!! Vi aspettiamo in Via dei Ramni, 30 (zona San Lorenzo a 50 mt da Piazzale A. Moro). Per cene e gruppi di più di 5 persone è gradita la prenotazione. </item>
+        <item>I Vicini Bistrot:!:Una piccola bottega realizzata per deliziare i palati più esigenti e coinvolgere nuove generazioni al gusto del buon cibo.Pochi posti per dedicare ad ogni cliente le giuste attenzioni e per raccontare la storia di ogni prodotto e la motivazione che ci ha portato all\'acquisto di esso. </item>
+        <item>Pizzeria Da Maria:!:Locale piccolo, curato, accogliente. 12 posti intorno a 2 tavoli, 4 alla mensola, qualche posto fuori quando è caldo. Prevalentemente da asporto e consegne a domicilio. Si può degustare la pizza in loco con modalità “fai da te”. I nostri ospiti dicono “è come a casa”. Non è proprio una pizzeria mordi e fuggi ma neanche un posto in cui passare un’intera serata a meno che non si prenoti per fine serata. Un piccolo spaccato di Napoli a Roma. </item>
+        <item>Pastasciutta:!:Pastasciutta è l\'unico posto a Roma dove poter mangiare pasta fresca prodotta sul posto la mattina stessa, cucinata espressa in soli 3 minuti (grazie alla veloce cottura della pasta fresca) ed a circa 4–5€. Il laboratorio-cucina è completamente a vista, potete osservare le affascinanti fasi di produzione della pasta e di cottura del vostro piatto, per poi mangiare sul posto o take away. </item>
+        <item>Take Your Time:!:E\' arrivato - finalmente! - Take Your Time, il nuovo wine bar all\'italiana di respiro internazionale nel cuore del quartiere Trastevere. Mettere la gente a proprio agio con l\'appagamento di tutti i sensi nella ricerca di Buoni sapori e Buona Atmosfera e l\'obiettivo dei padroni di casa per diventare un riferimento per la persona che si vuole "Prendere il suo tempo". </item>
+        <item>Panino Divino:!:un\'atmosfera informale,un locale piccolo e sorprendente, con sapori e profumi che si fanno ricordare. Una ristorazione veloce e di qualita, sullo stile slow food una vera eccellenza espressa. Quindi, se hai una vita veloce e dinamica, ma non rinunci al sapore del cibo preparato artigianalmente,hai scelto il posto giusto.Buono come il pane, anzi, Ottimo come la nostra nocchiarella di grano duro I nostri Panini non sarebbero cosi buoni senza un pane eccellente: 90 grammi sempre fragranti in grado di esaltare qualsiasi sapore e darvi il massimo del gusto. </item>
+        <item>Borgo 139:!:BORGO 139 nasce dall\'idea di due amiche, Barbara e Irene, appassionate di cucina e di gastronomia tipicamente italiana. I panini vengono fatti al momento, con pane sempre caldo e una vasta scelta di ingredienti, rigorosamente italiani e di primissima qualità. BORGO 139 non è soltanto panini, ma anche dolci artigianali, Frozen Yogurt e vendita di prodotti tipici italiani. </item>
+    </string-array>
 </resources>

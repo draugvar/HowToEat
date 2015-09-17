@@ -17,7 +17,8 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
         Bundle b = getIntent().getExtras();
         itemData = b.getParcelable(HomeActivity.EXTRA_ITEM);
-
+        TextView textView = (TextView) findViewById(R.id.location_description);
+        textView.setText(itemData.getDescription());
     }
 
     @Override

@@ -1,13 +1,12 @@
 package com.example.draug.howtoeat;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ItemData[] itemsData;
@@ -37,7 +36,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        viewHolder.txtViewTitle.setText(itemsData[position].getTitle());
+        viewHolder.textViewTitle.setText(itemsData[position].getTitle());
+        viewHolder.textViewDescription.setText(itemsData[position].getDescription());
         viewHolder.imgViewIcon.setImageResource(itemsData[position].getImageUrl());
 
     }
@@ -45,12 +45,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txtViewTitle;
+        public TextView textViewTitle;
+        public TextView textViewDescription;
         public ImageView imgViewIcon;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            txtViewTitle = (TextView) itemLayoutView.findViewById(R.id.item_title);
+            textViewTitle = (TextView) itemLayoutView.findViewById(R.id.item_title);
+            textViewDescription = (TextView) itemLayoutView.findViewById(R.id.item_description);
+            //textViewDescription.setEllipsize(TextUtils.TruncateAt.END);
             imgViewIcon = (ImageView) itemLayoutView.findViewById(R.id.item_icon);
         }
     }

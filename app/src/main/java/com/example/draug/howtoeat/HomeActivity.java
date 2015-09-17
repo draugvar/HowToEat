@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,12 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private Context context;
     public final static String EXTRA_ITEM = "item_data";
     public final static String EXTRA_POSITION = "position";
 
@@ -34,88 +34,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        context = getApplicationContext();
 
-        final Context context = getApplicationContext();
-        String[] mNavigation = getResources().getStringArray(R.array.navigation_array);
-        DrawerLayout mDrawerLayout;
-        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mNavigation));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        //set drawer button
-        mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
-        ) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mTitle);
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(mDrawerTitle);
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // Set user image and info
-        ImageView userImage = (ImageView) findViewById(R.id.userImage);
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user_image);
-        RoundImage roundedImage = new RoundImage(bm);
-        userImage.setImageDrawable(roundedImage);
-        TextView username = (TextView) findViewById(R.id.info_username);
-        TextView email = (TextView) findViewById(R.id.info_email);
-        SharedPreferences sharedPref = context.getSharedPreferences("userPref", Context.MODE_PRIVATE);
-        username.setText(sharedPref.getString("userEmail", "username"));
-        email.setText(sharedPref.getString("userEmail", "username"));
-
-        // 1. get a reference to recyclerView
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // this is data for recycler view
-        final ItemData itemsData[] = { new ItemData("Il Fosso","",R.drawable.restaurant_icon),
-                new ItemData("PizzaPiù","",R.drawable.pizza_icon),
-                new ItemData("Cloud","",R.drawable.restaurant_icon),
-                new ItemData("Favorite Dishes","",R.drawable.restaurant_icon),
-                new ItemData("Like Eat","",R.drawable.restaurant_icon),
-                new ItemData("A muzzarell'","",R.drawable.pizza_icon),
-                new ItemData("Da Maria","",R.drawable.pizza_icon)};
-
-        // 2. set layoutManger
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // 3. create an adapter
-        MyAdapter mAdapter = new MyAdapter(itemsData);
-        // 4. set adapter
-        recyclerView.setAdapter(mAdapter);
-        // 5. set item animator to DefaultAnimator
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        // 6. set clickListener
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        // starting new activity
-                        Intent i = new Intent(HomeActivity.this, LocationActivity.class);
-                        Bundle b = new Bundle();
-                        b.putParcelable(EXTRA_ITEM,itemsData[position]);
-                        i.putExtras(b);
-                        startActivity(i);
-                    }
-                })
-        );
+        setDrawer();
+        setRecyclerView();
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
@@ -191,5 +113,96 @@ public class HomeActivity extends AppCompatActivity {
     public void setTitle(CharSequence title) {
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
+    }
+
+    private void setDrawer(){
+        String[] mNavigation = getResources().getStringArray(R.array.navigation_array);
+        DrawerLayout mDrawerLayout;
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mNavigation));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        //set drawer button
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mTitle);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(mDrawerTitle);
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Set user image and info
+        ImageView userImage = (ImageView) findViewById(R.id.userImage);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user_image);
+        RoundImage roundedImage = new RoundImage(bm);
+        userImage.setImageDrawable(roundedImage);
+        TextView username = (TextView) findViewById(R.id.info_username);
+        TextView email = (TextView) findViewById(R.id.info_email);
+        SharedPreferences sharedPref = context.getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        username.setText(sharedPref.getString("userEmail", "username"));
+        email.setText(sharedPref.getString("userEmail", "username"));
+    }
+
+    private void setRecyclerView() {
+        // 1. get a reference to recyclerView
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        /*this is data for recycler view
+        final ItemData itemsData[] = { new ItemData("Il Fosso","",R.drawable.restaurant_icon),
+                new ItemData("PizzaPiù","",R.drawable.pizza_icon),
+                new ItemData("Cloud","",R.drawable.restaurant_icon),
+                new ItemData("Favorite Dishes","",R.drawable.restaurant_icon),
+                new ItemData("Like Eat","",R.drawable.restaurant_icon),
+                new ItemData("A muzzarell'","",R.drawable.pizza_icon),
+                new ItemData("Da Maria","",R.drawable.pizza_icon)};*/
+        String[] locations = getResources().getStringArray(R.array.locations_array);
+        final ItemData itemsData[] = new ItemData[locations.length];
+        for(int i = 0; i < locations.length; i++){
+            String[] aux = locations[i].split(":!:");
+            itemsData[i] = new ItemData(aux[0],aux[1], R.drawable.restaurant_icon);
+        }
+
+        // 2. set layoutManger
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 3. create an adapter
+        MyAdapter mAdapter = new MyAdapter(itemsData);
+        // 4. set adapter
+        recyclerView.setAdapter(mAdapter);
+        // 5. set item animator to DefaultAnimator
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        // 6. set clickListener
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        // starting new activity
+                        Intent i = new Intent(HomeActivity.this, LocationActivity.class);
+                        Bundle b = new Bundle();
+                        b.putParcelable(EXTRA_ITEM, itemsData[position]);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
+                })
+        );
     }
 }
