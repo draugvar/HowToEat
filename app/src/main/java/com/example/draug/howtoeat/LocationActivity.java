@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LocationActivity extends AppCompatActivity {
     private ItemData itemData;
@@ -42,5 +43,9 @@ public class LocationActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void prenotate(View view){
+        Toast.makeText(getApplicationContext(),"FAB pressed", Toast.LENGTH_SHORT).show();
     }
 }

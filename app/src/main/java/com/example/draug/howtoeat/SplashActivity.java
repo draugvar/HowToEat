@@ -13,7 +13,7 @@ public class SplashActivity extends /*AppCompatActivity*/ Activity {
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
 
-        int SPLASH_TIME_OUT = 2500;
+        int SPLASH_TIME_OUT = 2000;
 
         new Handler().postDelayed(new Runnable() {
 
