@@ -1,7 +1,6 @@
 package com.example.draug.howtoeat;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ItemData[] itemsData;
+    private LocationData[] itemsData;
 
-    public MyAdapter(ItemData[] itemsData) {
+    public MyAdapter(LocationData[] itemsData) {
         this.itemsData = itemsData;
     }
 
@@ -64,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return itemsData.length;
     }
 
-    public ItemData getItemDataByID( int position ){
+    public LocationData getItemDataByID( int position ){
         return itemsData[position];
     }
 }

@@ -168,24 +168,24 @@ public class HomeActivity extends AppCompatActivity {
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         /*this is data for recycler view
-        final ItemData itemsData[] = { new ItemData("Il Fosso","",R.drawable.restaurant_icon),
-                new ItemData("PizzaPiù","",R.drawable.pizza_icon),
-                new ItemData("Cloud","",R.drawable.restaurant_icon),
-                new ItemData("Favorite Dishes","",R.drawable.restaurant_icon),
-                new ItemData("Like Eat","",R.drawable.restaurant_icon),
-                new ItemData("A muzzarell'","",R.drawable.pizza_icon),
-                new ItemData("Da Maria","",R.drawable.pizza_icon)};*/
+        final LocationData locationsData[] = { new LocationData("Il Fosso","",R.drawable.restaurant_icon),
+                new LocationData("PizzaPiù","",R.drawable.pizza_icon),
+                new LocationData("Cloud","",R.drawable.restaurant_icon),
+                new LocationData("Favorite Dishes","",R.drawable.restaurant_icon),
+                new LocationData("Like Eat","",R.drawable.restaurant_icon),
+                new LocationData("A muzzarell'","",R.drawable.pizza_icon),
+                new LocationData("Da Maria","",R.drawable.pizza_icon)};*/
         String[] locations = getResources().getStringArray(R.array.locations_array);
-        final ItemData itemsData[] = new ItemData[locations.length];
+        final LocationData locationsData[] = new LocationData[locations.length];
         for(int i = 0; i < locations.length; i++){
             String[] aux = locations[i].split(":!:");
-            itemsData[i] = new ItemData(aux[0],aux[1], R.drawable.restaurant_icon);
+            locationsData[i] = new LocationData(aux[0],aux[1], R.drawable.restaurant_icon);
         }
 
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // 3. create an adapter
-        MyAdapter mAdapter = new MyAdapter(itemsData);
+        MyAdapter mAdapter = new MyAdapter(locationsData);
         // 4. set adapter
         recyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
@@ -198,7 +198,7 @@ public class HomeActivity extends AppCompatActivity {
                         // starting new activity
                         Intent i = new Intent(HomeActivity.this, LocationActivity.class);
                         Bundle b = new Bundle();
-                        b.putParcelable(EXTRA_ITEM, itemsData[position]);
+                        b.putParcelable(EXTRA_ITEM, locationsData[position]);
                         i.putExtras(b);
                         startActivity(i);
                     }

@@ -1,7 +1,5 @@
 package com.example.draug.howtoeat;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,16 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LocationActivity extends AppCompatActivity {
-    private ItemData itemData;
+    private LocationData locationData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         Bundle b = getIntent().getExtras();
-        itemData = b.getParcelable(HomeActivity.EXTRA_ITEM);
+        locationData = b.getParcelable(HomeActivity.EXTRA_ITEM);
         TextView textView = (TextView) findViewById(R.id.location_description);
-        textView.setText(itemData.getDescription());
+        textView.setText(locationData.getDescription());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setRippleColor(Color.YELLOW);
     }
@@ -31,7 +29,7 @@ public class LocationActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_location, menu);
-        getSupportActionBar().setTitle(itemData.getTitle());
+        getSupportActionBar().setTitle(locationData.getTitle());
         return true;
     }
 
@@ -52,6 +50,6 @@ public class LocationActivity extends AppCompatActivity {
 
     public void prenotate(View view){
         Toast.makeText(getApplicationContext(),"La tua prenotazione è stata inoltrata...", Toast.LENGTH_SHORT).show();
-
+        locationData.setReserved();
     }
 }

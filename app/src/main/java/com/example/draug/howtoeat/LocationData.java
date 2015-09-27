@@ -4,37 +4,40 @@ package com.example.draug.howtoeat;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ItemData implements Parcelable{
+public class LocationData implements Parcelable{
 
 
     private String title;
     private String description;
     private int imageUrl;
+    private int reservationCode;
     private boolean reserved;
 
-    public ItemData(String title, String description, int imageUrl){
+    public LocationData(String title, String description, int imageUrl){
 
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.reservationCode = -1;
         this.reserved = false;
     }
 
-    protected ItemData(Parcel in) {
+    protected LocationData(Parcel in) {
         title = in.readString();
         description = in.readString();
         imageUrl = in.readInt();
+        reservationCode = in.readInt();
     }
 
-    public static final Creator<ItemData> CREATOR = new Creator<ItemData>() {
+    public static final Creator<LocationData> CREATOR = new Creator<LocationData>() {
         @Override
-        public ItemData createFromParcel(Parcel in) {
-            return new ItemData(in);
+        public LocationData createFromParcel(Parcel in) {
+            return new LocationData(in);
         }
 
         @Override
-        public ItemData[] newArray(int size) {
-            return new ItemData[size];
+        public LocationData[] newArray(int size) {
+            return new LocationData[size];
         }
     };
 
@@ -42,6 +45,7 @@ public class ItemData implements Parcelable{
     public String getTitle(){ return title; }
     public String getDescription(){ return description; }
     public int getImageUrl(){ return imageUrl; }
+    public int getReservationCode(){ return reservationCode; }
     public boolean getReserved(){ return reserved; }
 
     // setters
@@ -63,5 +67,6 @@ public class ItemData implements Parcelable{
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeInt(imageUrl);
+        parcel.writeInt(reservationCode);
     }
 }
