@@ -10,12 +10,14 @@ public class ItemData implements Parcelable{
     private String title;
     private String description;
     private int imageUrl;
+    private boolean reserved;
 
     public ItemData(String title, String description, int imageUrl){
 
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.reserved = false;
     }
 
     protected ItemData(Parcel in) {
@@ -36,12 +38,20 @@ public class ItemData implements Parcelable{
         }
     };
 
-    // getters & setters
-    public String getTitle(){
-        return title;
-    }
-    public String getDescription(){ return description; };
+    // getters
+    public String getTitle(){ return title; }
+    public String getDescription(){ return description; }
     public int getImageUrl(){ return imageUrl; }
+    public boolean getReserved(){ return reserved; }
+
+    // setters
+    public void setReserved(){
+        reserved = true;
+    }
+
+    public void resetReserved(){
+        reserved = false;
+    }
 
     @Override
     public int describeContents() {

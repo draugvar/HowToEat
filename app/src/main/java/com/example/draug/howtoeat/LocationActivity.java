@@ -1,6 +1,9 @@
 package com.example.draug.howtoeat;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +23,8 @@ public class LocationActivity extends AppCompatActivity {
         itemData = b.getParcelable(HomeActivity.EXTRA_ITEM);
         TextView textView = (TextView) findViewById(R.id.location_description);
         textView.setText(itemData.getDescription());
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setRippleColor(Color.YELLOW);
     }
 
     @Override
@@ -46,6 +51,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     public void prenotate(View view){
-        Toast.makeText(getApplicationContext(),"FAB pressed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"La tua prenotazione è stata inoltrata...", Toast.LENGTH_SHORT).show();
+
     }
 }

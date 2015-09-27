@@ -53,7 +53,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemLayoutView);
             textViewTitle = (TextView) itemLayoutView.findViewById(R.id.item_title);
             textViewDescription = (TextView) itemLayoutView.findViewById(R.id.item_description);
-            //textViewDescription.setEllipsize(TextUtils.TruncateAt.END);
             imgViewIcon = (ImageView) itemLayoutView.findViewById(R.id.item_icon);
         }
     }
