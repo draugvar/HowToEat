@@ -1,17 +1,21 @@
 package com.example.draug.howtoeat;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LocationActivity extends AppCompatActivity {
-    private LocationData locationData;
+    private static LocationData locationData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,34 @@ public class LocationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void prenotate(View view){
-        Toast.makeText(getApplicationContext(),"La tua prenotazione è stata inoltrata...", Toast.LENGTH_SHORT).show();
-        locationData.setReserved();
+    public void prenotate(View view) {
+        ReservationDialogFragment dialogFragment = new ReservationDialogFragment();
+        dialogFragment.show(getFragmentManager(),"reservation");
+    }
+
+    public static class ReservationDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // Get the layout inflater
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(inflater.inflate(R.layout.dialog_reservation, null))
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            locationData.setReserved();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            locationData.resetReserved();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
     }
 }

@@ -21,23 +21,34 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private Context context;
+    private RecyclerView recyclerView;
+    private SharedPreferences sharedPreferences;
     public final static String EXTRA_ITEM = "item_data";
-    public final static String EXTRA_POSITION = "position";
+    public final static String POSITION = "scroll_position";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = getApplicationContext();
-
         setDrawer();
+        sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        // 1. get a reference to recyclerView
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
         setRecyclerView();
+        Toast.makeText(getApplicationContext(), "" + sharedPreferences.getInt(POSITION,0),Toast.LENGTH_SHORT).show();
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
@@ -164,17 +175,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        // 1. get a reference to recyclerView
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        /*this is data for recycler view
-        final LocationData locationsData[] = { new LocationData("Il Fosso","",R.drawable.restaurant_icon),
-                new LocationData("PizzaPiù","",R.drawable.pizza_icon),
-                new LocationData("Cloud","",R.drawable.restaurant_icon),
-                new LocationData("Favorite Dishes","",R.drawable.restaurant_icon),
-                new LocationData("Like Eat","",R.drawable.restaurant_icon),
-                new LocationData("A muzzarell'","",R.drawable.pizza_icon),
-                new LocationData("Da Maria","",R.drawable.pizza_icon)};*/
         String[] locations = getResources().getStringArray(R.array.locations_array);
         final LocationData locationsData[] = new LocationData[locations.length];
         for(int i = 0; i < locations.length; i++){
@@ -184,6 +184,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.scrollToPosition(sharedPreferences.getInt(POSITION, 0));
         // 3. create an adapter
         MyAdapter mAdapter = new MyAdapter(locationsData);
         // 4. set adapter
@@ -200,6 +201,7 @@ public class HomeActivity extends AppCompatActivity {
                         Bundle b = new Bundle();
                         b.putParcelable(EXTRA_ITEM, locationsData[position]);
                         i.putExtras(b);
+                        sharedPreferences.edit().putInt(POSITION, position).apply();
                         startActivity(i);
                     }
                 })

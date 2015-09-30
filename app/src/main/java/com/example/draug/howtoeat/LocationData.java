@@ -10,7 +10,6 @@ public class LocationData implements Parcelable{
     private String title;
     private String description;
     private int imageUrl;
-    private int reservationCode;
     private boolean reserved;
 
     public LocationData(String title, String description, int imageUrl){
@@ -18,7 +17,6 @@ public class LocationData implements Parcelable{
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
-        this.reservationCode = -1;
         this.reserved = false;
     }
 
@@ -26,7 +24,7 @@ public class LocationData implements Parcelable{
         title = in.readString();
         description = in.readString();
         imageUrl = in.readInt();
-        reservationCode = in.readInt();
+
     }
 
     public static final Creator<LocationData> CREATOR = new Creator<LocationData>() {
@@ -45,7 +43,6 @@ public class LocationData implements Parcelable{
     public String getTitle(){ return title; }
     public String getDescription(){ return description; }
     public int getImageUrl(){ return imageUrl; }
-    public int getReservationCode(){ return reservationCode; }
     public boolean getReserved(){ return reserved; }
 
     // setters
@@ -67,6 +64,5 @@ public class LocationData implements Parcelable{
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeInt(imageUrl);
-        parcel.writeInt(reservationCode);
     }
 }
