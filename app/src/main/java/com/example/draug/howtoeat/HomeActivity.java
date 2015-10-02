@@ -48,7 +48,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         setRecyclerView();
-        Toast.makeText(getApplicationContext(), "" + sharedPreferences.getInt(POSITION,0),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPreferences.edit().remove(POSITION);
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
