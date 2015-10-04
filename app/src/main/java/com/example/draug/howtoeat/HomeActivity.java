@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        sharedPreferences.edit().remove(POSITION);
+        sharedPreferences.edit().remove(POSITION).apply();
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
