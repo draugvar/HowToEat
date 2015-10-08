@@ -1,5 +1,6 @@
 package com.example.draug.howtoeat;
 
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private LocationData[] itemsData;
+import java.util.LinkedList;
 
-    public MyAdapter(LocationData[] itemsData) {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private LinkedList<LocationData> itemsData;
+
+    public MyAdapter(LinkedList<LocationData> itemsData) {
         this.itemsData = itemsData;
     }
 
@@ -24,8 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         // create ViewHolder
 
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-        return viewHolder;
+        return new ViewHolder(itemLayoutView);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -35,9 +37,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        viewHolder.textViewTitle.setText(itemsData[position].getTitle());
-        viewHolder.textViewDescription.setText(itemsData[position].getDescription());
-        viewHolder.imgViewIcon.setImageResource(itemsData[position].getImageUrl());
+        viewHolder.textViewTitle.setText(itemsData.get(position).getTitle());
+        viewHolder.textViewDescription.setText(itemsData.get(position).getDescription());
+        viewHolder.imgViewIcon.setImageResource(itemsData.get(position).getImageUrl());
 
     }
 
@@ -60,10 +62,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Return the size of your itemsData (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return itemsData.length;
+        return itemsData.size();
     }
 
     public LocationData getItemDataByID( int position ){
-        return itemsData[position];
+        return itemsData.get(position);
     }
 }

@@ -23,9 +23,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.LinkedList;
 
 public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
@@ -34,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     private Context context;
     private RecyclerView recyclerView;
     private SharedPreferences sharedPreferences;
+    private LinkedList<LocationData> locationsData;
+
     public final static String EXTRA_ITEM = "item_data";
     public final static String POSITION = "scroll_position";
 
@@ -44,6 +49,13 @@ public class HomeActivity extends AppCompatActivity {
         context = getApplicationContext();
         setDrawer();
         sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        // 0. set set of locations
+        String[] locations = getResources().getStringArray(R.array.locations_array);
+        locationsData = new LinkedList<>();
+        for (String location : locations) {
+            String[] aux = location.split(":!:");
+            locationsData.add(new LocationData(aux[0], aux[1], R.drawable.restaurant_icon));
+        }
         // 1. get a reference to recyclerView
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
     }
@@ -185,13 +197,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        String[] locations = getResources().getStringArray(R.array.locations_array);
-        final LocationData locationsData[] = new LocationData[locations.length];
-        for(int i = 0; i < locations.length; i++){
-            String[] aux = locations[i].split(":!:");
-            locationsData[i] = new LocationData(aux[0],aux[1], R.drawable.restaurant_icon);
+        for(LocationData locationData: locationsData){
+            if(locationData.getReserved()) {
+                locationsData.addFirst(locationData);
+                Toast.makeText(getApplicationContext(),"vero",Toast.LENGTH_LONG).show();
+            }
         }
-
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.scrollToPosition(sharedPreferences.getInt(POSITION, 0));
@@ -209,7 +220,7 @@ public class HomeActivity extends AppCompatActivity {
                         // starting new activity
                         Intent i = new Intent(HomeActivity.this, LocationActivity.class);
                         Bundle b = new Bundle();
-                        b.putParcelable(EXTRA_ITEM, locationsData[position]);
+                        b.putParcelable(EXTRA_ITEM, locationsData.get(position));
                         i.putExtras(b);
                         sharedPreferences.edit().putInt(POSITION, position).apply();
                         startActivity(i);
@@ -250,6 +261,5 @@ public class HomeActivity extends AppCompatActivity {
             greetingIdText.setText(locationData.getId());
             greetingContentText.setText(locationData.getContent());*/
         }
-
     }
 }

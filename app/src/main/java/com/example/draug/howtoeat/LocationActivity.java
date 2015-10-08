@@ -3,7 +3,9 @@ package com.example.draug.howtoeat;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 public class LocationActivity extends AppCompatActivity {
     private static LocationData locationData;
+    private static Bundle pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class LocationActivity extends AppCompatActivity {
         textView.setText(locationData.getDescription());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setRippleColor(Color.YELLOW);
+        pb = getParentActivityIntent().getExtras();
     }
 
     @Override
@@ -71,6 +75,7 @@ public class LocationActivity extends AppCompatActivity {
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             locationData.setReserved();
+                            pb.putParcelable(HomeActivity.EXTRA_ITEM, locationData);
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
