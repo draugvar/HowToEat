@@ -6,13 +6,15 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
@@ -48,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         setRecyclerView();
+        new HttpRequestTask().execute();
     }
 
     @Override
@@ -211,5 +216,40 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 })
         );
+    }
+
+    private class HttpRequestTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                final String url = "http://192.168.0.8:8080/stringa";
+                /*RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                LocationData locationData = restTemplate.getForObject(url, LocationData.class);
+                return locationData;*/
+
+                // Create a new RestTemplate instance
+                RestTemplate restTemplate = new RestTemplate();
+
+                // Add the String message converter
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+                // Make the HTTP GET request, marshaling the response to a String
+                return restTemplate.getForObject(url, String.class, "");
+            } catch (Exception e) {
+                Log.e("HomeActivity", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String message) {
+            /*TextView greetingIdText = (TextView) findViewById(R.id.id_value);
+            TextView greetingContentText = (TextView) findViewById(R.id.content_value);
+            greetingIdText.setText(locationData.getId());
+            greetingContentText.setText(locationData.getContent());*/
+        }
+
     }
 }
