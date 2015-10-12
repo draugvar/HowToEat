@@ -40,7 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     private LinkedList<LocationData> locationsData;
 
     public final static String EXTRA_ITEM = "item_data";
-    public final static String POSITION = "scroll_position";
+    public final static String POSITION = "position";
+    public final static String PREFERENCES = "user_pref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         context = getApplicationContext();
         setDrawer();
-        sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         // 0. set set of locations
         String[] locations = getResources().getStringArray(R.array.locations_array);
         locationsData = new LinkedList<>();
@@ -58,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         // 1. get a reference to recyclerView
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        Toast.makeText(getApplicationContext(),"CIAO",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -68,9 +70,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        sharedPreferences.edit().remove(POSITION).apply();
+    protected void onPause() {
+        super.onPause();
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
@@ -191,21 +192,16 @@ public class HomeActivity extends AppCompatActivity {
         userImage.setImageDrawable(roundedImage);
         TextView username = (TextView) findViewById(R.id.info_username);
         TextView email = (TextView) findViewById(R.id.info_email);
-        SharedPreferences sharedPref = context.getSharedPreferences("userPref", Context.MODE_PRIVATE);
-        username.setText(sharedPref.getString("userEmail", "username"));
-        email.setText(sharedPref.getString("userEmail", "username"));
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        username.setText(sharedPref.getString(User.NAME, "username"));
+        email.setText(sharedPref.getString(User.EMAIL, "username"));
     }
 
     private void setRecyclerView() {
-        for(LocationData locationData: locationsData){
-            if(locationData.getReserved()) {
-                locationsData.addFirst(locationData);
-                Toast.makeText(getApplicationContext(),"vero",Toast.LENGTH_LONG).show();
-            }
-        }
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.scrollToPosition(sharedPreferences.getInt(POSITION, 0));
+        sharedPreferences.edit().remove(POSITION);
         // 3. create an adapter
         MyAdapter mAdapter = new MyAdapter(locationsData);
         // 4. set adapter
@@ -222,6 +218,7 @@ public class HomeActivity extends AppCompatActivity {
                         Bundle b = new Bundle();
                         b.putParcelable(EXTRA_ITEM, locationsData.get(position));
                         i.putExtras(b);
+                        i.putExtra(POSITION, position);
                         sharedPreferences.edit().putInt(POSITION, position).apply();
                         startActivity(i);
                     }

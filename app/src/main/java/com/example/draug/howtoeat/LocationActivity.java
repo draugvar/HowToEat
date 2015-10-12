@@ -15,10 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LocationActivity extends AppCompatActivity {
     private static LocationData locationData;
-    private static Bundle pb;
+    private static int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,11 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
         Bundle b = getIntent().getExtras();
         locationData = b.getParcelable(HomeActivity.EXTRA_ITEM);
+        position = b.getInt(HomeActivity.POSITION);
         TextView textView = (TextView) findViewById(R.id.location_description);
         textView.setText(locationData.getDescription());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setRippleColor(Color.YELLOW);
-        pb = getParentActivityIntent().getExtras();
-    }
+        fab.setRippleColor(Color.YELLOW);}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,8 +74,7 @@ public class LocationActivity extends AppCompatActivity {
             builder.setView(inflater.inflate(R.layout.dialog_reservation, null))
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            locationData.setReserved();
-                            pb.putParcelable(HomeActivity.EXTRA_ITEM, locationData);
+
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
