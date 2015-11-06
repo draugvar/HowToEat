@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 public class LocationActivity extends AppCompatActivity {
     private static LocationData locationData;
     private static int position;
+    private static SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,13 @@ public class LocationActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         locationData = b.getParcelable(HomeActivity.EXTRA_ITEM);
         position = b.getInt(HomeActivity.POSITION);
+        sharedPreferences = getSharedPreferences(HomeActivity.PREFERENCES, Context.MODE_PRIVATE);
+        // set view
         TextView textView = (TextView) findViewById(R.id.location_description);
         textView.setText(locationData.getDescription());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setRippleColor(Color.YELLOW);}
+        fab.setRippleColor(Color.YELLOW);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,7 +68,7 @@ public class LocationActivity extends AppCompatActivity {
 
     public static class ReservationDialogFragment extends DialogFragment {
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Get the layout inflater
@@ -74,7 +79,9 @@ public class LocationActivity extends AppCompatActivity {
             builder.setView(inflater.inflate(R.layout.dialog_reservation, null))
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-
+                            HomeActivity.locationsData.add(
+                                    0, HomeActivity.locationsData.remove(position));
+                            sharedPreferences.edit().remove(HomeActivity.POSITION).apply();
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
-        android:background="@color/SeaGreen">
+        android:background="@color/MyOrange">
         <!-- here header -->
     </LinearLayout>
 
@@ -21,7 +21,7 @@
         android:paddingRight="20dp"
         android:orientation="vertical"
         android:layout_below="@+id/header"
-        android:background="@color/SeaGreen">
+        android:background="@color/MyOrange">
 
         <EditText
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/login_button"
             android:layout_marginTop="20dp"
-            android:background="@color/SeaGreen"
+            android:background="@color/MyOrange"
             android:contentDescription="LoginButton"
             android:clickable="true"
             android:onClick="buttonLogin"/>
@@ -82,7 +82,7 @@
             android:maxWidth="250dp"
             android:scaleType="fitCenter"
             android:src="@drawable/login_fb"
-            android:background="@color/SeaGreen"
+            android:background="@color/MyOrange"
             android:layout_marginTop="10dp"
             android:contentDescription="fbButton"
             android:onClick="buttonFb" />

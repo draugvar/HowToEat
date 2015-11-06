@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import io.realm.Realm;
+
 public class SplashActivity extends /*AppCompatActivity*/ Activity {
     private SharedPreferences sharedPreferences;
 
@@ -16,7 +18,7 @@ public class SplashActivity extends /*AppCompatActivity*/ Activity {
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
 
-        sharedPreferences = getSharedPreferences(HomeActivity.PREFERENCES, Context.MODE_PRIVATE);
+        final Realm realm = Realm.getInstance(this);
 
         int SPLASH_TIME_OUT = 2000;
         new Handler().postDelayed(new Runnable() {
@@ -31,7 +33,7 @@ public class SplashActivity extends /*AppCompatActivity*/ Activity {
                 // This method will be executed once the timer is over
                 // Start your app main activity
                 Intent i;
-                if(sharedPreferences.contains(User.EMAIL) && sharedPreferences.contains(User.PASSWORD))
+                if(realm.where(User.class).count() == 1)
                     i = new Intent(SplashActivity.this, HomeActivity.class);
                 else
                     i = new Intent(SplashActivity.this, LoginActivity.class);
